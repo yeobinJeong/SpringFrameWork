@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Example configuration to get you started.</description>
+
+	<context:component-scan base-package="com.springexample.demo01" />
+
+	<!-- 스프링 IoC 컨테이너가 관리해야 할 객체를 등록 -->
+	<bean id="myConsumer" 
+		class="com.springexample.demo01.MyServiceConsumer">
+		<!-- myConsumer = new MyServiceConsumer(getBean(myMessageService))  -->
+		<constructor-arg ref="myMessageService" />
+		
+		<!-- myConsumer.setTimeService(getBean("myTimeService")) -->
+		<property name="timeService" ref="myTimeService" />
+	</bean>	
+	<bean id="myTimeService"
+		class="com.springexample.demo01.MyTimeService">
+		<property name="format" ref="simpleDateFormat" />
+	</bean>
+	<bean id="myMessageService"
+		class="com.springexample.demo01.MyMessageService">
+	</bean>
+	<bean id="simpleDateFormat"
+		class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy년 MM월 dd일 hh시 mm분 ss초" />
+	</bean>
+
+
+</beans>
+
+
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="11.spring.mvc4"/>
+<aop-project name="08.demoweb-spring-mvc"/>
+<aop-project name="04.spring-hello-world4"/>
+<aop-project name="02.spring-hello-world2"/>
+<aop-project name="10.demoweb-spring-mvc2"/>
+<aop-project name="03.spring-hello-world3"/>
+<aop-project name="12.demoweb-spring-mvc3"/>
+<aop-project name="07.spring.mvc2"/>
+<aop-project name="09.spring.mvc3"/>
+<aop-project name="06.spring.mvc"/>
+<aop-project name="01.spring-hello-world"/>
+</aop-reference-model>

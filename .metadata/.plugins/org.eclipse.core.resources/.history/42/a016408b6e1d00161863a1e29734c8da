@@ -1,0 +1,51 @@
+package com.example.springmvc4;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Repository;
+@Repository(value="person")
+public class Person {
+	
+	@NotEmpty//@NotNull + @NotBlank 
+	private String name;
+	private String email;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date birth;
+	private Phone phone;//home, office, mobile
+	private ArrayList<String> tags;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Date getBirth() {
+		return birth;
+	}
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+	public Phone getPhone() {
+		return phone;
+	}
+	public void setPhone(Phone phone) {
+		this.phone = phone;
+	}
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
+	}
+	
+}

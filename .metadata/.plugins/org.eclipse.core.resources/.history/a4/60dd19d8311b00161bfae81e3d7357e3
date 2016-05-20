@@ -1,0 +1,125 @@
+package com.mvcdemoweb.controller;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.mvcdemoweb.common.Util;
+import com.mvcdemoweb.model.dao.ConnectionHelper;
+import com.mvcdemoweb.model.dao.MemberDao;
+import com.mvcdemoweb.model.dto.Member;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class AccountController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	
+	@RequestMapping(value = "account/loginform.action", method = RequestMethod.GET)
+	public String index(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		
+		
+		return "account/loginform";
+	}
+	@RequestMapping(value = "account/login.action", method = RequestMethod.POST)
+	public String index(Locale locale, Model model, HttpServletRequest req, 
+			String passwd, String memberId) {
+		//요청 데이터 읽기
+				
+				
+				passwd = Util.getHashedString(passwd, "SHA-256");
+
+				//요청 처리
+				
+				MemberDao dao = new MemberDao() {
+					
+					private String dsn = "oracle";
+					@Override
+					public void insert(Member member) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public Member getMemberByIdAndPasswd(String id, String passwd) {
+						Connection conn = null;
+						PreparedStatement pstmt = null;
+						ResultSet rs = null;
+						Member member = null;
+						try {
+							conn = ConnectionHelper.getConnection(dsn);
+							String sql = 
+								"SELECT memberid, email, usertype, active, regdate " + 
+								"FROM member WHERE memberid = ? AND passwd = ? AND active = '1'";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setString(1, id);
+							pstmt.setString(2, passwd);
+							rs = pstmt.executeQuery();
+							if (rs.next()) {
+								member = new Member();
+								member.setMemberId(rs.getString(1));
+								member.setEmail(rs.getString(2));				
+								member.setUserType(rs.getString(3));
+								member.setActive(rs.getBoolean(4));
+								member.setRegDate(rs.getDate(5));
+							}
+						} catch (Exception ex) {
+							member = null;
+						} finally {
+							try { rs.close(); } catch (Exception ex) {}
+							try { pstmt.close(); } catch (Exception ex) {}
+							try { conn.close(); } catch (Exception ex) {}
+						}
+						return member;	
+					}
+					
+					@Override
+					public Member getMemberById(String id) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+					
+					@Override
+					public ArrayList<Member> getList() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+				};
+				Member member = dao.getMemberByIdAndPasswd(memberId, passwd);
+				
+				
+				if (member == null) {
+					System.out.println("실패");
+					return "account/loginform";
+				} else {
+					model.addAttribute("loginuser", member);
+					return "index";
+				}
+				
+				
+				
+				
+	}
+	
+	
+	
+}

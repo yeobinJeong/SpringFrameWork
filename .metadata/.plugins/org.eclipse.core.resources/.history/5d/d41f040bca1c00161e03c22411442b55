@@ -1,0 +1,37 @@
+package com.example.springmvc4;
+
+import java.util.Map;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import jxl.write.*;
+
+import org.springframework.web.servlet.view.document.*;
+
+public class ExcelView extends AbstractJExcelView {
+
+	@Override
+	protected void buildExcelDocument(
+			Map<String, Object> data,
+			WritableWorkbook workbook,
+			HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		resp.addHeader(
+			"Content-Disposition", "Attachment;Filename=sales.xls");
+		
+		WritableSheet sheet = workbook.createSheet("Anual Sales", 0);
+		
+		sheet.addCell(new Label(0, 0, "Year"));
+		sheet.addCell(new Label(1, 0, "Sales"));
+		
+		Random r = new Random();
+		
+		for (int i = 2001; i < 2016; i++) {
+			sheet.addCell(new Label(0, i - 2000, String.format("%d", i)));
+			sheet.addCell(new Label(1, i - 2000, String.format("%d", r.nextInt(90000) + 10000)));
+		}
+	}
+
+}

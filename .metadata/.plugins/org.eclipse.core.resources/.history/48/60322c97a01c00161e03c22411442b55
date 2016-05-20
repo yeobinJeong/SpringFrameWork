@@ -1,0 +1,139 @@
+package com.mvcdemoweb.controller;
+
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.mvcdemoweb.model.dao.UploadDao;
+import com.mvcdemoweb.model.dto.Upload;
+import com.mvcdemoweb.model.dto.UploadFile;
+import com.mvcdemoweb.view.DownloadView;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class FileController {
+
+	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	
+	private UploadDao dao;
+	
+	@Autowired
+	@Qualifier(value ="oracleUploadDao")
+	public void setMemberDao(UploadDao dao){
+		this.dao = dao;
+	}
+	
+	@RequestMapping(value = "/upload/list.action", method = RequestMethod.GET)
+	public String list(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) {
+
+		req.getSession(true);
+		if (session.getAttribute("loginuser") == null) {
+			return "redirect:/account/login.action";
+		}
+
+		// 사용자 목록 데이터 조회
+		ArrayList<Upload> uploads = dao.getUploadList();
+
+		model.addAttribute("uploads", uploads);
+
+		
+		return "upload/uploadlist";
+	}
+
+	@RequestMapping(value = "/upload/view.action", method = RequestMethod.GET)
+	public String view(String uploadno, Model model ) {
+
+		int iUploadNo = Integer.parseInt(uploadno);
+		Upload upload =	dao.getUploadByUploadNo(iUploadNo);
+		
+		return "upload/uploadview";
+	}
+
+	@RequestMapping(value = "/upload/write.action", method = RequestMethod.GET)
+	public String uploadwrite() {// 파일 업로드를 포함하는
+
+		return "upload/uploadwriteform";
+	}
+
+	@RequestMapping(value = "/upload/write.action", method = RequestMethod.POST)
+	public String upload(MultipartHttpServletRequest req, String title, String uploader, String content) {// 파일 업로드를 포함하는
+															// Request
+
+		
+		String path = req.getSession().getServletContext().getRealPath("/WEB-INF/upload/");
+
+		MultipartFile file = req.getFile("file");// file-data
+		if (file != null && file.getSize() > 0) {
+
+			try {
+				FileOutputStream ostream = new FileOutputStream(path + "/" + file.getOriginalFilename());
+				InputStream istream = file.getInputStream();
+				byte[] buffer = new byte[512];
+				while (true) {
+					int count = istream.read(buffer, 0, buffer.length);
+					if (count == -1)
+						break;
+					ostream.write(buffer, 0, count);
+				}
+				
+				
+				System.out.println(file.getOriginalFilename());
+				Upload upload = new Upload();
+				ArrayList<UploadFile> uploadFiles = new ArrayList<>();
+				UploadFile uploadFile = new UploadFile();
+				upload.setTitle(title);
+				upload.setUploader(uploader);
+				upload.setContent(content);
+				
+				uploadFile.setSavedFileName(file.getOriginalFilename());
+				uploadFile.setUserFileName(file.getOriginalFilename());
+				uploadFile.setUploadNo(dao.insertUpload(upload));
+				dao.insertUploadFile(uploadFile);
+				
+				uploadFiles.add(uploadFile);
+				/*upload.setFiles(uploadFiles);*/
+				
+				
+				istream.close();
+				ostream.close();
+				
+			} catch (Exception ex) {
+			}
+		}
+		String data = req.getParameter("data");// form-data
+		System.out.println("data :" + data);
+
+		return "redirect:/upload/list.action";
+	}
+
+	@RequestMapping(value = "/upload/download.action", method = RequestMethod.GET)
+	public ModelAndView download() {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setView(new DownloadView());
+		return mav;
+	}
+
+}
