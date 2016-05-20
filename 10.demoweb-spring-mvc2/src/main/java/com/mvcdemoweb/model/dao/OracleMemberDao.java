@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.mvcdemoweb.model.dto.Member;
@@ -19,6 +20,7 @@ public class OracleMemberDao implements MemberDao {
 	/* (non-Javadoc)
 	 * @see com.mvcdemoweb.model.dao.MemberDao#insert(com.mvcdemoweb.model.dto.Member)
 	 */
+	
 	@Override
 	public void insert(com.mvcdemoweb.model.dto.Member member) {
 		

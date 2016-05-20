@@ -3,6 +3,7 @@
   <module moduleId="org.eclipse.jst.jee.server:09.spring.mvc3" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:10.spring.mvc4" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:11.spring.mvc4" serverId="Tomcat v8.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:14.demoweb-spring-mvc3" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:08.demoweb-spring-mvc" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:12.demoweb-spring-mvc3" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:06.spring.mvc" serverId="Tomcat v8.0 Server at localhost"/>

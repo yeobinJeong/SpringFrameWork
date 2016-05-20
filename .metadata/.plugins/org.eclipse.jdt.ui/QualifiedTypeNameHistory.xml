@@ -11,7 +11,6 @@
 <fullyQualifiedTypeName name="com.mvcdemoweb.model.dto.Member"/>
 <fullyQualifiedTypeName name="oracle.jdbc.rowset.OracleCachedRowSet"/>
 <fullyQualifiedTypeName name="javax.inject.Qualifier"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
 <fullyQualifiedTypeName name="org.springframework.web.servlet.View"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
@@ -32,4 +31,14 @@
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.mvcdemoweb.common.Util"/>
+<fullyQualifiedTypeName name="com.example.springjdbc.ExampleService"/>
+<fullyQualifiedTypeName name="javax.sql.DataSource"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="com.example.springjdbc.model.service.MemberService"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.support.JdbcUtils"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.JdbcTemplate"/>
+<fullyQualifiedTypeName name="com.example.springjdbc.model.dto.Member"/>
 </qualifiedTypeNameHistroy>

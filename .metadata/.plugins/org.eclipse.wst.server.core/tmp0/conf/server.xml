@@ -124,12 +124,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\11.spring.mvc4" path="/springmvc2" reloadable="true" source="org.eclipse.jst.jee.server:11.spring.mvc4"/><Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\10.demoweb-spring-mvc2" path="/controller" reloadable="true" source="org.eclipse.jst.jee.server:10.demoweb-spring-mvc2">
-
-	<!-- web application에서 사용할 수 있는 컨테이너 자원 등록 -->
-	<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/demoweb" password="oracle" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:xe" username="demoweb"/>
-
-</Context><Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\12.demoweb-spring-mvc3" path="/demoweb-spring-compact3" reloadable="true" source="org.eclipse.jst.jee.server:12.demoweb-spring-mvc3"/><Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\13.spring-mvc5" path="/springmvc5" reloadable="true" source="org.eclipse.jst.jee.server:13.spring-mvc5"/></Host>
+      <Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\BigData\Lap\SpringBasic\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\14.demoweb-spring-mvc3" path="/demoweb-spring-compact3" reloadable="true" source="org.eclipse.jst.jee.server:14.demoweb-spring-mvc3"/></Host>
     </Engine>
   </Service>
 </Server>
