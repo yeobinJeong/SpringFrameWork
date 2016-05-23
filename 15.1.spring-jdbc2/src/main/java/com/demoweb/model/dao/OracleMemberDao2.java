@@ -33,13 +33,6 @@ public class OracleMemberDao2 implements MemberDao {
 				+ "memberid, passwd, email, usertype, active) "
 				+ "VALUES (:memberId, :passwd, :email, :userType, :active)";
 
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		params.put("memberId", member.getMemberId());
-//		params.put("passwd", member.getPasswd());
-//		params.put("email", member.getEmail());
-//		params.put("userType", member.getUserType());
-//		params.put("active", member.isActive());
-		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("memberId", member.getMemberId(), Types.VARCHAR);
 		params.addValue("passwd", member.getPasswd(), Types.VARCHAR);
@@ -48,6 +41,14 @@ public class OracleMemberDao2 implements MemberDao {
 		params.addValue("active", member.isActive(), Types.BOOLEAN);
 		
 		jdbcTemplate.update(sql, params);
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		params.put("memberId", member.getMemberId());
+//		params.put("passwd", member.getPasswd());
+//		params.put("email", member.getEmail());
+//		params.put("userType", member.getUserType());
+//		params.put("active", member.isActive());
+		
+		
 	}
 
 	public List<Member> selectMemberList() {
