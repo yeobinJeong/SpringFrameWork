@@ -11,4 +11,5 @@
   <module moduleId="org.eclipse.jst.jee.server:05.demoweb-mvc-with-maven" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:07.spring.mvc2" serverId="Tomcat v8.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:10.demoweb-spring-mvc2" serverId="Tomcat v8.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:demoweb-spring-compact4" serverId="Tomcat v8.0 Server at localhost"/>
 </modules>

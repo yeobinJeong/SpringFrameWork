@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 논리적 클래스 만들기 -->
+<mapper namespace="com.mvcdemoweb.model.mapper.UploadMapper">
+
+	<insert id="insertUpload" parameterType="Upload" >
+		<selectKey keyProperty="uploadNo" resultType="int" order="BEFORE">
+			select upload_sequence.nextVal from dual
+		</selectKey>
+		
+		INSERT INTO upload
+		(uploadno, title, uploader, content)
+		VALUES
+		(#{uploadNo}, #{title}, #{uploader}, #{content})
+		
+	</insert>
+
+	<insert id="insertUploadFile" parameterType="UploadFile">
+	
+		<selectKey keyProperty="uploadFileNo" resultType="int" order="BEFORE">
+			select uploadfile_sequence.nextVal from dual
+		</selectKey>
+		
+		Insert Into
+		uploadfile (uploadfileno, uploadno, savedfilename, userfilename)
+		Values (#{uploadFileNo}, #{uploadNo}, #{savedFileName}, #{userFileName})
+	</insert>
+	
+	<select id="selectUploads" resultType="Upload">
+		SELECT uploadno, title, regdate 
+		from upload 
+		where deleted = '0'
+	</select>
+	
+	
+	<select id="selectUploadByUploadNo" 
+		parameterType="int" resultType="Upload">
+		SELECT uploadno,title,uploader, content, regdate 
+		FROM upload 
+		WHERE uploadno = #{uploadNo} AND deleted = '0'
+	</select>
+	
+	<select id="selectUploadFilesByUploadNo"
+		parameterType="int" resultType="UploadFile">
+		SELECT uploadFileNo, uploadNo, savedFileName, userFileName, downloadCount
+		FROM uploadfile 
+		WHERE uploadno = #{uploadNo}
+	</select>
+	
+	<select id="selectUploadFileByUploadFileNo"
+		parameterType="int" resultType="UploadFile">
+		SELECT uploadFileNo, uploadNo, savedFileName, userFileName
+		FROM uploadfile 
+		WHERE uploadfileno = #{uploadFileNo}
+	</select>
+	
+	<update id="increaseUploadReadCount" parameterType="int">
+		UPDATE upload 
+		SET readcount = readcount + 1 
+		WHERE uploadno = #{uploadNo}
+	</update>
+	
+	<update id="increaseUploadFileDownloadCount" parameterType="int">
+		UPDATE uploadfile 
+		SET downloadcount = downloadcount + 1
+		WHERE uploadfileno = #{uploadFileNo}
+	</update>
+
+
+</mapper>
+  
+

@@ -1,0 +1,17 @@
+package com.mvcdemoweb.model.mapper;
+
+import com.mvcdemoweb.model.dto.Upload;
+import com.mvcdemoweb.model.dto.UploadFile;
+
+public interface UploadMapper {
+
+	int insertUpload(Upload upload);
+	void insertUploadFile(UploadFile file);
+	/*Member selectMemberById(String memberId);
+	Member selectMemberByIdAndPasswd(
+		HashMap<String, Object> params);*/
+	
+}
+
+
+

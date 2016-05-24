@@ -39,6 +39,10 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\BigData\Lap\SpringBasic\17_1.spring-mybatis"/>
+			<item value="C:\BigData\Lap\SpringBasic\17.spring-mybatis"/>
+			<item value="C:\BigData\Lap\SpringBasic\18.demoweb-spring-mybatis"/>
+			<item value="C:\Users\stu25\Desktop\16.demoweb-spring-jdbc"/>
 			<item value="C:\BigData\Lap\SpringBasic\15.1.spring-jdbc2"/>
 			<item value="C:\BigData\Lap\SpringBasic\15.spring-jdbc2"/>
 			<item value="C:\Users\stu25\Desktop\15.spring-jdbc2"/>

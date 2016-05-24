@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 논리적 클래스 만들기 -->
+<mapper namespace="com.mvcdemoweb.model.mapper.UploadMapper">
+
+	<insert id="insertUpload" parameterType="Upload">
+
+
+		INSERT INTO upload
+		(uploadno, title, uploader, content)
+		VALUES
+		(upload_sequence.nextVal, #{title}, #{uploader}, #{content})
+
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select upload_sequence.currVal
+			from dual
+		</selectKey>
+	</insert>
+
+	<insert id="insertUploadFile" parameterType="UploadFile">
+		Insert Into
+		uploadfile (uploadfileno, uploadno, savedfilename, userfilename)
+		Values (uploadfile_sequence.nextVal, uploadNo, savedFileName,
+		userFileName)
+	</insert>
+	
+	<select id="selectUploads" resultType="Upload">
+		SELECT uploadno, title, regdate 
+		from upload 
+		where deleted = '0'
+	</select>
+	
+	
+	<select id="selectUploadByUploadNo" parameterType="int" resultType="Upload">
+		SELECT uploadno,title,uploader, content, regdate
+		FROM upload
+		WHERE uploadno = #{uploadNo} AND deleted = '0'
+	</select>
+
+	<!-- <select id="selectMemberById" parameterType="string" resultType="Member">
+		SELECT memberId, email, userType, active, regDate
+		FROM member
+		WHERE
+		memberId = #{memberId}
+	</select>
+
+	<select id="selectMemberByIdAndPasswd" parameterType="hashMap"
+		resultType="Member">
+		SELECT memberId, email, userType, active, regDate
+		FROM
+		member
+		WHERE memberId = #{memberId} AND passwd = #{passwd}
+	</select> -->
+
+
+</mapper>
+  
+
